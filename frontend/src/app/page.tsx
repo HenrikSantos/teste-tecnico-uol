@@ -2,20 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import Customer from '../components/Customer';
 import Image from 'next/image';
-
-interface CustomerData {
-  id: number;
-  attributes: {
-    name: string;
-    email: string;
-    cpf: string;
-    telephone: string;
-    status: string;
-  };
-}
+import { CustomerProps } from '../components/Customer';
 
 function App() {
-  const [customers, setCustomers] = useState<CustomerData[]>([]);
+  const [customers, setCustomers] = useState<CustomerProps[]>([]);
 
   useEffect(() => {
     async function fetchCustomers() {
@@ -38,11 +28,6 @@ function App() {
 
   return (
     <main className='w-8/12 mx-auto my-20 space-y-10'>
-      <section className='flex justify-start items-center gap-5'>
-        <Image className="w-[3rem]" src={"/user.svg"} alt="logo" width={1000} height={1000} />
-        <h1 className='font-semibold text-3xl'>Painel de Clientes</h1>
-      </section>
-      <hr />
       <section>
         <section className='flex space-y-4 justify-between items-center'>
           <section className='grid grid-cols-1 gap-4'>
@@ -52,15 +37,7 @@ function App() {
           <button className='px-4 border py-2 border-amber-500 mr-10 rounded-md bg-amber-500 text-white'>Novo cliente</button>
         </section>
         {customers.map(customer => (
-          <Customer
-            key={customer.id}
-            id={customer.id}
-            name={customer.attributes.name}
-            email={customer.attributes.email}
-            cpf={customer.attributes.cpf}
-            telephone={customer.attributes.telephone}
-            status={customer.attributes.status}
-          />
+          <Customer {...customer} key={customer.id} />
         ))}
       </section>
       <p className='font-extralight'>Exibindo {customers.length} clientes</p>

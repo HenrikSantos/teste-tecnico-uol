@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface CustomerProps {
-  id: number;
+export interface CustomerProps {
+  id?: number;
   name: string;
   email: string;
   cpf: string;
   telephone: string;
-  status: string;
+  status?: "" | "Ativo" | "Inativo" | "Aguardando ativação" | "Desativado";
 }
 
 const Customer: React.FC<CustomerProps> = ({
