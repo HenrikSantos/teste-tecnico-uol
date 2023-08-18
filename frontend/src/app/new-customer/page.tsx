@@ -17,7 +17,7 @@ export default function NewCustomer() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("http://localhost:1337/api/customers", {
+      await axios.post("http://localhost:1337/api/customers", {
         data: {
           name: customer.name,
           email: customer.email,
@@ -27,9 +27,9 @@ export default function NewCustomer() {
         }
       });
 
-      console.log(response);
+      window.alert("Usuário criado com sucesso!");
     } catch (error) {
-      console.error(error);
+      window.alert("Ocorreu um erro ao criar um novo cliente, certifique-se que os dados estão corretos e que o servidor esteja rodando");
     }
   };
 

@@ -38,6 +38,13 @@ export default function Page({ params }: PageInterface) {
   }, [params.customerId]);
 
   const handleSubmit = async () => {
+    if (!customer.status) {
+      window.alert("Altere o status")
+      return;
+    }
+    if (Object.values(customer).some((el) => !el)) {
+      window.alert("Algum campo está vazio!")
+    }
     try {
       const response = await axios.put(`http://localhost:1337/api/customers/${params.customerId}`, {
         data: {
@@ -51,8 +58,7 @@ export default function Page({ params }: PageInterface) {
 
       window.alert('Cliente atualizado com sucesso!');
     } catch (error) {
-      window.alert('Ocorreu um erro ao atualizar o cliente, certifique que o servidor esteja rodando');
-      console.error(error);
+      window.alert('Ocorreu um erro ao atualizar o cliente, certifique-se que os dados estão corretos e que o servidor esteja rodando');
     }
   };
 

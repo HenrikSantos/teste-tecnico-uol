@@ -21,6 +21,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
     <form className='w-3/12'>
       <input
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3'
+        required
         type="text"
         name="name"
         value={customer.name}
@@ -30,15 +31,17 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
 
       <input
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3'
+        required
         type="email"
         name="email"
         value={customer.email}
         onChange={handleChange}
-        placeholder="Email"
+        placeholder="E-mail"
       />
 
       <InputMask
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3'
+        required
         mask="999.999.999-99"
         type="text"
         name="cpf"
@@ -49,6 +52,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
 
       <InputMask
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3'
+        required
         mask="(99) 99999-9999"
         type="text"
         name="telephone"
@@ -59,11 +63,12 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
 
       <select
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3 hover:cursor-pointer font-extralight'
+        required
         name="status"
         value={customer.status}
         onChange={handleChange}
       >
-        <option value="">Status</option>
+        <option disabled selected value="">Status</option>
         <option value="Ativo">Ativo</option>
         <option value="Inativo">Inativo</option>
         <option value="Aguardando ativação">Aguardando ativação</option>
