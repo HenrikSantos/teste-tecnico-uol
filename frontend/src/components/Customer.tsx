@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export interface CustomerProps {
   id?: number;
@@ -37,14 +38,15 @@ const Customer: React.FC<CustomerProps> = ({
         <p>Email: {email}</p>
       </div>
       <div className='w-3/12'>
-        <p>CPF: {cpf}</p>
-        <p>Telefone: {telephone}</p>
+        <p className='text-lg text-black font-light'>{cpf}</p>
+        <p>{telephone}</p>
       </div>
       <div className='w-3/12 flex items-center gap-2'>
         <div className={`rounded-full w-4 h-4 ${statusColor()}`} />
         <p>{status}</p>
       </div>
-      <button
+      <Link
+        href={`/edit/${id}`}
         className="
           border border-amber-500 border-x-2 px-8 py-2 rounded text-amber-500 text-sm
           hover:bg-amber-500 hover:text-white
@@ -52,7 +54,7 @@ const Customer: React.FC<CustomerProps> = ({
         type="button"
       >
         Editar
-      </button>
+      </Link>
     </div>
   );
 };

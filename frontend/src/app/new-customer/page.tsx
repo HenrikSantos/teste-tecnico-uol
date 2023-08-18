@@ -16,19 +16,23 @@ export default function NewCustomer() {
   });
 
   const handleSubmit = async () => {
-    console.log({ data: { ...customer } })
-    axios.post("http://localhost:1337/api/customers", {
-      "data": {
-        "name": customer.name,
-        "email": customer.email,
-        "cpf": customer.cpf,
-        "telephone": customer.telephone,
-        "status": customer.status
-      }
-    }).then((response) => {
+    try {
+      const response = await axios.post("http://localhost:1337/api/customers", {
+        data: {
+          name: customer.name,
+          email: customer.email,
+          cpf: customer.cpf,
+          telephone: customer.telephone,
+          status: customer.status
+        }
+      });
+
       console.log(response);
-    });
+    } catch (error) {
+      console.error(error);
+    }
   };
+
 
   return (
     <main className='w-8/12 mx-auto'>
