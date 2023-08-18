@@ -1,8 +1,19 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import Customer from '../components/Customer';
-import Image from 'next/image';
 import { CustomerProps } from '../components/Customer';
+import Link from 'next/link';
+
+interface CustomerFetch {
+  id: number;
+  attributes: {
+    name: string;
+    email: string;
+    cpf: string;
+    telephone: string;
+    status?: "" | "Ativo" | "Inativo" | "Aguardando ativação" | "Desativado";
+  }
+}
 
 function App() {
   const [customers, setCustomers] = useState<CustomerProps[]>([]);
@@ -17,7 +28,9 @@ function App() {
         }
 
         const data = await response.json();
-        setCustomers(data.data);
+        console.log(data.data);
+
+        setCustomers(data.data.map((el: CustomerFetch) => ({ id: el.id, ...el.attributes })));
       } catch (error) {
         console.error(error);
       }
@@ -34,11 +47,9 @@ function App() {
             <h3 className='font-medium text-xl '>Listagem de usuários</h3>
             <p>Escolha um cliente para visualizar os detalhes</p>
           </section>
-          <button className='px-4 border py-2 border-amber-500 mr-10 rounded-md bg-amber-500 text-white'>Novo cliente</button>
+          <Link href={"/new-customer"} className='px-4 border py-2 border-amber-500 mr-10 rounded-md bg-amber-500 text-white'>Novo cliente</Link>
         </section>
-        {customers.map(customer => (
-          <Customer {...customer} key={customer.id} />
-        ))}
+        {customers.map((customer: CustomerProps) => <Customer {...customer} key={customer.id} />)}
       </section>
       <p className='font-extralight'>Exibindo {customers.length} clientes</p>
     </main>

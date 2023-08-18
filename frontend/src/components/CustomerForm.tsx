@@ -16,6 +16,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
     }));
   };
 
+
   return (
     <form className='w-3/12'>
       <input
@@ -26,7 +27,6 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
         onChange={handleChange}
         placeholder="Nome"
       />
-      <br />
 
       <input
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3'
@@ -36,7 +36,6 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
         onChange={handleChange}
         placeholder="Email"
       />
-      <br />
 
       <InputMask
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3'
@@ -47,7 +46,6 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
         onChange={handleChange}
         placeholder="CPF"
       />
-      <br />
 
       <InputMask
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3'
@@ -58,7 +56,6 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
         onChange={handleChange}
         placeholder="Telefone"
       />
-      <br />
 
       <select
         className='w-full mx-auto p-3 border-2 border-zinc-300 rounded m-3 hover:cursor-pointer font-extralight'
@@ -72,7 +69,6 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
         <option value="Aguardando ativação">Aguardando ativação</option>
         <option value="Desativado">Desativado</option>
       </select>
-      <br />
     </form>
   );
 }
