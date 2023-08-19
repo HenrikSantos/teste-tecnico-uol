@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Customer from '../components/Customer';
 import { CustomerProps } from '../components/Customer';
 import Link from 'next/link';
+import axios from 'axios';
 
 interface CustomerFetch {
   id: number;
@@ -17,20 +18,15 @@ interface CustomerFetch {
 
 function App() {
   const [customers, setCustomers] = useState<CustomerProps[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchCustomers() {
       try {
-        const response = await fetch('http://localhost:1337/api/customers');
+        const { data } = await axios.get('http://localhost:3001/customers');
+        console.log(data);
 
-        if (!response.ok) {
-          throw new Error('Erro ao buscar os clientes');
-        }
-
-        const data = await response.json();
-
-        setCustomers(data.data.map((el: CustomerFetch) => ({ id: el.id, ...el.attributes })));
+        setCustomers(data);
         setLoading(false)
       } catch (error) {
         console.error(error);

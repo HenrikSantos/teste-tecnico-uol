@@ -17,14 +17,12 @@ export default function NewCustomer() {
 
   const handleSubmit = async () => {
     try {
-      await axios.post("http://localhost:1337/api/customers", {
-        data: {
-          name: customer.name,
-          email: customer.email,
-          cpf: customer.cpf,
-          telephone: customer.telephone,
-          status: customer.status
-        }
+      await axios.post("http://localhost:3001/customers", {
+        name: customer.name,
+        email: customer.email,
+        cpf: customer.cpf,
+        telephone: customer.telephone,
+        status: customer.status
       });
 
       window.alert("Usuário criado com sucesso!");

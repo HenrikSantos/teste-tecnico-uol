@@ -24,8 +24,8 @@ export default function Page({ params }: PageInterface) {
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const response = await axios.get(`http://localhost:1337/api/customers/${params.customerId}`);
-        setCustomer(response.data.data.attributes);
+        const { data } = await axios.get(`http://localhost:3001/customers/${params.customerId}`);
+        setCustomer(data);
         setLoading(false);
       } catch (error) {
         window.alert("Error fetching customer data:" + error);
@@ -46,14 +46,12 @@ export default function Page({ params }: PageInterface) {
       window.alert("Algum campo está vazio!")
     }
     try {
-      const response = await axios.put(`http://localhost:1337/api/customers/${params.customerId}`, {
-        data: {
-          name: customer.name,
-          email: customer.email,
-          cpf: customer.cpf,
-          telephone: customer.telephone,
-          status: customer.status
-        }
+      const response = await axios.put(`http://localhost:3001/customers/${params.customerId}`, {
+        name: customer.name,
+        email: customer.email,
+        cpf: customer.cpf,
+        telephone: customer.telephone,
+        status: customer.status
       });
 
       window.alert('Cliente atualizado com sucesso!');
