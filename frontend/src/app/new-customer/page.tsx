@@ -40,8 +40,8 @@ export default function NewCustomer() {
       <p>Informe os campos a seguir para criar novo usuário:</p>
       <CustomerForm customer={customer} setCustomer={setCustomer} />
       <section className='w-3/12 flex justify-between'>
-        <button className='w-full px-8 py-2 border border-amber-500 mr-10 rounded-md bg-amber-500 text-white' type="button" onClick={handleSubmit}>Criar</button>
-        <Link href={"/"} className='w-full border border-amber-500 px-8 py-2 rounded-md text-amber-500 hover:bg-amber-500 hover:text-white text-center'>
+        <button id='submitBtn' className='w-full px-8 py-2 border border-amber-500 mr-10 rounded-md bg-amber-500 text-white' type="submit" onClick={handleSubmit}>Criar</button>
+        <Link id='backBtn' href={"/"} className='w-full border border-amber-500 px-8 py-2 rounded-md text-amber-500 hover:bg-amber-500 hover:text-white text-center'>
           Voltar
         </Link>
       </section>

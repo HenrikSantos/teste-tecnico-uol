@@ -32,7 +32,7 @@ const Customer: React.FC<CustomerProps> = ({
   };
 
   return (
-    <div className="border my-6 py-4 px-6 flex items-center justify-between rounded-sm text-zinc-500">
+    <div id={cpf.replaceAll(".", "").replaceAll("-", "")} className="border my-6 py-4 px-6 flex items-center justify-between rounded-sm text-zinc-500">
       <div className="w-3/12">
         <p className='text-black'>{name}</p>
         <p>Email: {email}</p>

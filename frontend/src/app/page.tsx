@@ -55,7 +55,7 @@ function App() {
                   <h3 className='font-medium text-xl '>Listagem de usuários</h3>
                   <p>Escolha um cliente para visualizar os detalhes</p>
                 </section>
-                <Link href={"/new-customer"} className='px-4 border py-2 border-amber-500 mr-10 rounded-md bg-amber-500 text-white'>Novo cliente</Link>
+                <Link id='novoCliente' href={"/new-customer"} className='px-4 border py-2 border-amber-500 mr-10 rounded-md bg-amber-500 text-white'>Novo cliente</Link>
               </section>
               {customers.map((customer: CustomerProps) => <Customer {...customer} key={customer.id} />)}
             </section>

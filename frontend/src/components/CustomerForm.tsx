@@ -68,7 +68,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
         value={customer.status}
         onChange={handleChange}
       >
-        <option disabled selected value="">Status</option>
+        <option disabled value="">Status</option>
         <option value="Ativo">Ativo</option>
         <option value="Inativo">Inativo</option>
         <option value="Aguardando ativação">Aguardando ativação</option>
