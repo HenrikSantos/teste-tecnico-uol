@@ -46,6 +46,7 @@ const Customer: React.FC<CustomerProps> = ({
         <p>{status}</p>
       </div>
       <Link
+        id={"editBtn" + cpf.replaceAll(".", "").replaceAll("-", "")}
         href={`/edit/${id}`}
         className="
           border border-amber-500 border-x-2 px-8 py-2 rounded text-amber-500 text-sm

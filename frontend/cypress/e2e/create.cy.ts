@@ -8,7 +8,7 @@ describe('Visit /new-customer', () => {
 
 describe('New Customer Form', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/new-customer'); // Replace with the actual path
+    cy.visit('http://localhost:3000/new-customer');
   });
 
   it('fills out the form and submits successfully', () => {
