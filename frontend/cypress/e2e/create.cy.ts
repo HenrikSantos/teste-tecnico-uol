@@ -6,7 +6,7 @@ describe('Visit /new-customer', () => {
   })
 })
 
-describe('New Customer Form', () => {
+describe('Create customer', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/new-customer');
   });

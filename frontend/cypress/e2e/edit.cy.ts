@@ -1,5 +1,5 @@
 
-describe('Create Customer and edit', () => {
+describe('Edit', () => {
   const name = 'Cypress Test' + Math.floor(Math.random() * 10000000009);
   const email = `${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@CypressTest.com`;
   const cpf = Math.floor(Math.random() * 10000000009).toString().padStart(11, '0');
@@ -9,7 +9,7 @@ describe('Create Customer and edit', () => {
     cy.visit('http://localhost:3000/new-customer');
   });
 
-  it('fills out the form and submits successfully', () => {
+  it('create customer and edit', () => {
     cy.get('[name="name"]').type(name);
     cy.get('[name="email"]').type(email);
     cy.get('[name="cpf"]').type(cpf);
