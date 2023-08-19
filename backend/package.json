@@ -7,6 +7,10 @@
     "sqlite3": "^5.1.6"
   },
   "scripts": {
-    "start": "node ./src/server"
+    "start": "node ./src/server",
+    "lint": "eslint . --fix"
+  },
+  "devDependencies": {
+    "eslint": "^8.47.0"
   }
 }

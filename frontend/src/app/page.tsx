@@ -1,24 +1,14 @@
-'use client'
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Customer from '../components/Customer';
 import { CustomerProps } from '../components/Customer';
 import Link from 'next/link';
 import axios from 'axios';
 
-interface CustomerFetch {
-  id: number;
-  attributes: {
-    name: string;
-    email: string;
-    cpf: string;
-    telephone: string;
-    status?: "" | "Ativo" | "Inativo" | "Aguardando ativação" | "Desativado";
-  }
-}
-
 function App() {
   const [customers, setCustomers] = useState<CustomerProps[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCustomers() {
@@ -27,7 +17,7 @@ function App() {
         console.log(data);
 
         setCustomers(data);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -40,18 +30,18 @@ function App() {
     <>
       {
         loading ? (
-          <main className="w-8/12 text-center mx-auto text-3xl" >
+          <main className="mx-auto w-8/12 text-center text-3xl" >
             Loading...
           </main>
         ) : (
-          <main className='w-8/12 mx-auto my-20 space-y-10'>
+          <main className='mx-auto my-20 w-8/12 space-y-10'>
             <section>
-              <section className='flex space-y-4 justify-between items-center'>
+              <section className='flex items-center justify-between space-y-4'>
                 <section className='grid grid-cols-1 gap-4'>
-                  <h3 className='font-medium text-xl '>Listagem de usuários</h3>
+                  <h3 className='text-xl font-medium '>Listagem de usuários</h3>
                   <p>Escolha um cliente para visualizar os detalhes</p>
                 </section>
-                <Link id='novoCliente' href={"/new-customer"} className='px-4 border py-2 border-amber-500 mr-10 rounded-md bg-amber-500 text-white'>Novo cliente</Link>
+                <Link id='novoCliente' href={'/new-customer'} className='mr-10 rounded-md border border-amber-500 bg-amber-500 px-4 py-2 text-white'>Novo cliente</Link>
               </section>
               {customers.map((customer: CustomerProps) => <Customer {...customer} key={customer.id} />)}
             </section>

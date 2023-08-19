@@ -7,57 +7,57 @@ export interface CustomerProps {
   email: string;
   cpf: string;
   telephone: string;
-  status?: "" | "Ativo" | "Inativo" | "Aguardando ativação" | "Desativado";
+  status?: '' | 'Ativo' | 'Inativo' | 'Aguardando ativação' | 'Desativado';
 }
 
 const Customer: React.FC<CustomerProps> = ({
-  id,
-  name,
-  email,
-  cpf,
-  telephone,
-  status
+	id,
+	name,
+	email,
+	cpf,
+	telephone,
+	status
 }) => {
-  const statusColor = () => {
-    switch (status) {
-      case 'Ativo':
-        return 'bg-green-500';
-      case 'Aguardando ativação':
-        return 'bg-yellow-500';
-      case 'Inativo':
-        return 'bg-red-500';
-      default:
-        return 'bg-gray-300';
-    }
-  };
+	const statusColor = () => {
+		switch (status) {
+		case 'Ativo':
+			return 'bg-green-500';
+		case 'Aguardando ativação':
+			return 'bg-yellow-500';
+		case 'Inativo':
+			return 'bg-red-500';
+		default:
+			return 'bg-gray-300';
+		}
+	};
 
-  return (
-    <div id={cpf.replaceAll(".", "").replaceAll("-", "")} className="border my-6 py-4 px-6 flex items-center justify-between rounded-sm text-zinc-500">
-      <div className="w-3/12">
-        <p className='text-black'>{name}</p>
-        <p>Email: {email}</p>
-      </div>
-      <div className='w-3/12'>
-        <p className='text-lg text-black font-light'>{cpf}</p>
-        <p>{telephone}</p>
-      </div>
-      <div className='w-3/12 flex items-center gap-2'>
-        <div className={`rounded-full w-4 h-4 ${statusColor()}`} />
-        <p>{status}</p>
-      </div>
-      <Link
-        id={"editBtn" + cpf.replaceAll(".", "").replaceAll("-", "")}
-        href={`/edit/${id}`}
-        className="
-          border border-amber-500 border-x-2 px-8 py-2 rounded text-amber-500 text-sm
+	return (
+		<div id={cpf.replaceAll('.', '').replaceAll('-', '')} className="my-6 flex items-center justify-between rounded-sm border px-6 py-4 text-zinc-500">
+			<div className="w-3/12">
+				<p className='text-black'>{name}</p>
+				<p>Email: {email}</p>
+			</div>
+			<div className='w-3/12'>
+				<p className='text-lg font-light text-black'>{cpf}</p>
+				<p>{telephone}</p>
+			</div>
+			<div className='flex w-3/12 items-center gap-2'>
+				<div className={`h-4 w-4 rounded-full ${statusColor()}`} />
+				<p>{status}</p>
+			</div>
+			<Link
+				id={'editBtn' + cpf.replaceAll('.', '').replaceAll('-', '')}
+				href={`/edit/${id}`}
+				className="
+          rounded border border-x-2 border-amber-500 px-8 py-2 text-sm text-amber-500
           hover:bg-amber-500 hover:text-white
         "
-        type="button"
-      >
+				type="button"
+			>
         Editar
-      </Link>
-    </div>
-  );
+			</Link>
+		</div>
+	);
 };
 
 export default Customer;
