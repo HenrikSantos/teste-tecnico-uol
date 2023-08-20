@@ -3,8 +3,6 @@ services:
   frontend:
     build:
       context: ./frontend
-    volumes: 
-      - ./frontend:/src
     ports:
       - "3000:3000"
     depends_on:
@@ -13,7 +11,5 @@ services:
   backend:
     build:
       context: ./backend
-    volumes: 
-      - ./backend:/src
     ports:
       - "3001:3001"

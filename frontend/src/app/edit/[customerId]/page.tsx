@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import CustomerForm from '@/components/CustomerForm';
 import { CustomerProps } from '@/components/Customer';
+import formValidator, { formCustomer } from '../../../utils/formValidator';
+
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -37,34 +39,17 @@ export default function Page({ params }: PageInterface) {
     fetchCustomer();
   }, [params.customerId]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     for (const [key, value] of Object.entries(customer)) {
       if (!value) {
         window.alert(`Erro: o campo ${key} está vazio!`);
         return;
       }
-      if (key === 'cpf') {
-        const regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-        if (!regex.test(value)) {
-          window.alert('Erro: o cpf está inválido!');
-          return;
-        }
-      }
-      if (key === 'telephone') {
-        const regex = /^\(\d{2}\) \d{5}-\d{4}$/;
-        if (!regex.test(value)) {
-          window.alert('Erro: o telefone está inválido!');
-          return;
-        }
-      }
-      if (key === 'email') {
-        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!regex.test(value)) {
-          window.alert('Erro: o email está inválido!');
-          return;
-        }
+      if (!formValidator(key as keyof formCustomer, value)) {
+        return;
       }
     }
+
     try {
       await axios.put(`http://localhost:3001/customers/${params.customerId}`, {
         name: customer.name,

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "cypress:open": "cypress open"
+    "test": "cypress open"
   },
   "dependencies": {
     "@types/node": "20.5.0",

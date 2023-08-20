@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import CustomerForm from '@/components/CustomerForm';
 import { CustomerProps } from '../../components/Customer';
+import formValidator, { formCustomer } from '../../utils/formValidator';
 import Link from 'next/link';
 import axios from 'axios';
+
 
 export default function NewCustomer() {
   const [customer, setCustomer] = useState<CustomerProps>({
@@ -21,26 +23,8 @@ export default function NewCustomer() {
         window.alert(`Erro: o campo ${key} está vazio!`);
         return;
       }
-      if (key === 'cpf') {
-        const regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-        if (!regex.test(value)) {
-          window.alert('Erro: o cpf está inválido!');
-          return;
-        }
-      }
-      if (key === 'telephone') {
-        const regex = /^\(\d{2}\) \d{5}-\d{4}$/;
-        if (!regex.test(value)) {
-          window.alert('Erro: o telefone está inválido!');
-          return;
-        }
-      }
-      if (key === 'email') {
-        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!regex.test(value)) {
-          window.alert('Erro: o email está inválido!');
-          return;
-        }
+      if (!formValidator(key as keyof formCustomer, value)) {
+        return;
       }
     }
 

@@ -1,21 +1,31 @@
-import { CustomerProps } from '@/components/Customer';
+export interface formCustomer {
+  name: string;
+  email: string;
+  cpf: string;
+  telephone: string;
+  status: string;
+}
 
-const validations = {
-  cpf: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
-  telephone: /^\(\d{2}\) \d{5}-\d{4}$/,
-  email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-};
+const formValidator = (key: keyof formCustomer, value: string): boolean => {
+  const regexMap: Record<keyof formCustomer, RegExp> & Record<string, RegExp> = {
+    cpf: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+    telephone: /^\(\d{2}\) \d{5}-\d{4}$/,
+    email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    name: /^.*$/,
+    status: /^.*$/
+  };
 
-
-export const validateForm: (formData, validations) => {
-  const errors: Record<string, string> = {};
-
-  for (const field in validations) {
-    const regex = validations[field];
-    if (!regex.test(formData[field])) {
-      errors[field] = `O campo ${field} está inválido!`;
-    }
+  const regex = regexMap[key];
+  if (!regex) {
+    return true; // No validation needed for other fields
   }
 
-  return errors;
+  if (!regex.test(value)) {
+    window.alert(`Erro: o ${key} está inválido!`);
+    return false;
+  }
+
+  return true;
 };
+
+export default formValidator;
