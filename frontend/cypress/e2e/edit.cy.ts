@@ -1,36 +1,122 @@
 import getRandomStatus from './utils/getRandomStatus';
 
-describe('Edit', () => {
-	const name = 'Cypress Test' + Math.floor(Math.random() * 10000000009);
-	const email = `${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@CypressTest.com`;
-	const cpf = Math.floor(Math.random() * 10000000009).toString().padStart(11, '0');
-	const telephone = Math.floor(Math.random() * 10000000009).toString().padStart(11, '0');
+const cpf = Math.floor(Math.random() * 10000000009).toString().padStart(11, '0');
+describe('cria um usuário', () => {
+  it('cria o usuário', () => {
+    cy.visit('http://localhost:3000/new-customer');
 
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
+    cy.get('[name="cpf"]').type(cpf);
+    cy.get('[name="telephone"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
+    cy.get('[name="status"]').select(getRandomStatus());
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Usuário criado com sucesso!');
+		});
+  });
+});
+
+describe('verifica os erros do formulário', () => {
 	beforeEach(() => {
-		cy.visit('http://localhost:3000/new-customer');
+		cy.visit('http://localhost:3000');
+    cy.get(`#editBtn${cpf}`).click();
+    cy.get('[name="name"]').clear();
+    cy.get('[name="email"]').clear();
+    cy.get('[name="cpf"]').clear();
+    cy.get('[name="telephone"]').clear();
 	});
+  
+	it('testa o campo name está vazio', () => {
+    cy.get('#submitBtn').click();
 
-	it('create customer and edit', () => {
-		cy.get('[name="name"]').type(name);
-		cy.get('[name="email"]').type(email);
-		cy.get('[name="cpf"]').type(cpf);
-		cy.get('[name="telephone"]').type(telephone);
-		cy.get('[name="status"]').select(getRandomStatus());
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Erro: o campo name está vazio!');
+		});
+  });
 
-		cy.get('#submitBtn').click();
+  it('testa o campo email está vazio', () => {
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Erro: o campo email está vazio!');
+		}); 
+  });
 
-		cy.get('#backBtn').click();
+  it('testa o campo email está inválido', () => {
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}example.com`);
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Erro: o email está inválido!');
+		}); 
+  });
 
-		cy.get(`#editBtn${cpf}`).click();
+  it('testa o campo cpf está vazio', () => {
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Erro: o campo cpf está vazio!');
+		}); 
+  });
 
-		const editedCpf = Math.floor(Math.random() * 10000000009).toString().padStart(11, '0');
-		cy.get('[name="cpf"]').clear();
-		cy.get('[name="cpf"]').type(editedCpf);
+  it('testa o campo cpf está inválido', () => {
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
+    cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(5, '0'));
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Erro: o cpf está inválido!');
+		}); 
+  });
 
-		cy.get('#submitBtn').click();
+  it('testa o campo telephone está vazio', () => {
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
+    cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Erro: o campo telephone está vazio!');
+		});
+  });
 
-		cy.get('#backBtn').click();
+  it('testa o campo telephone está inválido', () => {
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
+    cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
+    cy.get('[name="telephone"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(5, '0'));
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Erro: o telephone está inválido!');
+		}); 
+  });
+});
 
-		cy.get(`#editBtn${editedCpf}`);
-	});
+describe('edita um usuário', () => {
+  const newCpf = Math.floor(Math.random() * 10000000009).toString().padStart(11, '0');
+  it('envia o formulário', () => {
+    cy.visit('http://localhost:3000');
+    cy.get(`#editBtn${cpf}`).click();
+    
+    cy.get('[name="name"]').clear();
+    cy.get('[name="email"]').clear();
+    cy.get('[name="cpf"]').clear();
+    cy.get('[name="telephone"]').clear();
+
+    cy.get('[name="name"]').type('Cypress Test');
+    cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
+    cy.get('[name="cpf"]').type(newCpf);
+    cy.get('[name="telephone"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
+    cy.get('[name="status"]').select(getRandomStatus());
+    cy.get('#submitBtn').click();
+    cy.on('window:alert',(txt)=>{
+			expect(txt).to.contains('Usuário atualizado com sucesso!');
+		});
+  });
+
+  it('procura o novo usuario pelo cpf', () => {
+    cy.visit('http://localhost:3000');
+    cy.get(`#editBtn${newCpf}`);
+  });
 });
