@@ -38,13 +38,32 @@ export default function Page({ params }: PageInterface) {
   }, [params.customerId]);
 
   const handleSubmit = async () => {
-    if (!customer.status) {
-      window.alert('Altere o status');
-      return;
-    }
-    if (Object.values(customer).some((el) => !el)) {
-      window.alert('Algum campo está vazio!');
-      return;
+    for (const [key, value] of Object.entries(customer)) {
+      if (!value) {
+        window.alert(`Erro: o campo ${key} está vazio!`);
+        return;
+      }
+      if (key === 'cpf') {
+        const regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+        if (!regex.test(value)) {
+          window.alert('Erro: o cpf está inválido!');
+          return;
+        }
+      }
+      if (key === 'telephone') {
+        const regex = /^\(\d{2}\) \d{5}-\d{4}$/;
+        if (!regex.test(value)) {
+          window.alert('Erro: o telefone está inválido!');
+          return;
+        }
+      }
+      if (key === 'email') {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!regex.test(value)) {
+          window.alert('Erro: o email está inválido!');
+          return;
+        }
+      }
     }
     try {
       await axios.put(`http://localhost:3001/customers/${params.customerId}`, {

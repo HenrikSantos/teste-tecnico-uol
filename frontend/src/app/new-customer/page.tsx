@@ -16,21 +16,50 @@ export default function NewCustomer() {
   });
 
   const handleSubmit = async () => {
+    for (const [key, value] of Object.entries(customer)) {
+      if (!value) {
+        window.alert(`Erro: o campo ${key} está vazio!`);
+        return;
+      }
+      if (key === 'cpf') {
+        const regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+        if (!regex.test(value)) {
+          window.alert('Erro: o cpf está inválido!');
+          return;
+        }
+      }
+      if (key === 'telephone') {
+        const regex = /^\(\d{2}\) \d{5}-\d{4}$/;
+        if (!regex.test(value)) {
+          window.alert('Erro: o telefone está inválido!');
+          return;
+        }
+      }
+      if (key === 'email') {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!regex.test(value)) {
+          window.alert('Erro: o email está inválido!');
+          return;
+        }
+      }
+    }
+
     try {
       await axios.post('http://localhost:3001/customers', {
         name: customer.name,
         email: customer.email,
         cpf: customer.cpf,
         telephone: customer.telephone,
-        status: customer.status
+        status: customer.status,
       });
 
       window.alert('Usuário criado com sucesso!');
     } catch (error) {
-      window.alert('Ocorreu um erro ao criar um novo cliente, certifique-se que os dados estão corretos e que o servidor esteja rodando');
+      window.alert(
+        'Ocorreu um erro ao criar um novo cliente, certifique-se que os dados estão corretos e que o servidor esteja rodando'
+      );
     }
   };
-
 
   return (
     <main className='mx-auto mb-5 w-11/12 md:w-8/12'>
