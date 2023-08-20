@@ -10,8 +10,7 @@ Customer.init({
 	},
 	email: {
 		type: DataTypes.STRING,
-		allowNull: false,
-		unique: true
+		allowNull: false
 	},
 	cpf: {
 		type: DataTypes.STRING,
@@ -20,7 +19,8 @@ Customer.init({
 	},
 	telephone: {
 		type: DataTypes.STRING,
-		allowNull: false
+		allowNull: false,
+    unique: true
 	},
 	status: {
 		type: DataTypes.ENUM('Ativo', 'Inativo', 'Aguardando ativação', 'Desativado'),

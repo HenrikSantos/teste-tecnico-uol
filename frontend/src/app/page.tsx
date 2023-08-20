@@ -26,7 +26,7 @@ function App() {
   }, []);
 
   return (
-    <main className="mx-auto my-20 w-8/12">
+    <main className="mx-auto my-8 w-11/12 md:my-20 lg:w-8/12">
       {
         loading ? (
           <p className="mx-auto w-8/12 text-center text-3xl" >
@@ -35,12 +35,17 @@ function App() {
         ) : (
           <section className='space-y-10'>
             <section>
-              <section className='flex items-center justify-between space-y-4'>
+              <section className='flex items-center justify-between gap-5'>
                 <section className='grid grid-cols-1 gap-4'>
                   <h3 className='text-xl font-medium '>Listagem de usuários</h3>
-                  <p>Escolha um cliente para visualizar os detalhes</p>
+                  <p className='text-sm md:text-base'>Escolha um cliente para visualizar os detalhes</p>
                 </section>
-                <Link id='novoCliente' href={'/new-customer'} className='mr-10 rounded-md border border-amber-500 bg-amber-500 px-4 py-2 text-white'>Novo cliente</Link>
+                <Link
+                  id='novoCliente'
+                  href={'/new-customer'}
+                  className='w-8/12 rounded-md border border-amber-500 bg-amber-500 px-4 py-2 text-center text-white md:mr-10 md:w-auto'>
+                  Novo cliente
+                </Link>
               </section>
               {customers.map((customer: CustomerProps) => <Customer {...customer} key={customer.id} />)}
             </section>

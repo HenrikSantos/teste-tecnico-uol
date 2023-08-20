@@ -33,15 +33,17 @@ export default function NewCustomer() {
 
 
   return (
-    <main className='mx-auto w-8/12'>
+    <main className='mx-auto mb-5 w-11/12 md:w-8/12'>
       <h3 className='text-2xl font-semibold'>Novo usuário</h3>
       <p>Informe os campos a seguir para criar novo usuário:</p>
-      <CustomerForm customer={customer} setCustomer={setCustomer} />
-      <section className='flex w-3/12 justify-between'>
-        <button id='submitBtn' className='mr-10 w-full rounded-md border border-amber-500 bg-amber-500 px-8 py-2 text-white' type="submit" onClick={handleSubmit}>Criar</button>
-        <Link id='backBtn' href={'/'} className='w-full rounded-md border border-amber-500 px-8 py-2 text-center text-amber-500 hover:bg-amber-500 hover:text-white'>
-          Voltar
-        </Link>
+      <section className='xl:w-3/12'>
+        <CustomerForm customer={customer} setCustomer={setCustomer} />
+        <section className='flex justify-between'>
+          <button id='submitBtn' className='mr-10 w-full rounded-md border border-amber-500 bg-amber-500 px-8 py-2 text-white' type="submit" onClick={handleSubmit}>Criar</button>
+          <Link id='backBtn' href={'/'} className='w-full rounded-md border border-amber-500 px-8 py-2 text-center text-amber-500 hover:bg-amber-500 hover:text-white'>
+            Voltar
+          </Link>
+        </section>
       </section>
     </main>
   );
