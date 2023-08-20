@@ -14,12 +14,11 @@ function App() {
     async function fetchCustomers() {
       try {
         const { data } = await axios.get('http://localhost:3001/customers');
-        console.log(data);
-
         setCustomers(data);
-        setLoading(false);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -27,14 +26,14 @@ function App() {
   }, []);
 
   return (
-    <>
+    <main className="mx-auto my-20 w-8/12">
       {
         loading ? (
-          <main className="mx-auto w-8/12 text-center text-3xl" >
+          <p className="mx-auto w-8/12 text-center text-3xl" >
             Loading...
-          </main>
+          </p>
         ) : (
-          <main className='mx-auto my-20 w-8/12 space-y-10'>
+          <section className='space-y-10'>
             <section>
               <section className='flex items-center justify-between space-y-4'>
                 <section className='grid grid-cols-1 gap-4'>
@@ -46,10 +45,10 @@ function App() {
               {customers.map((customer: CustomerProps) => <Customer {...customer} key={customer.id} />)}
             </section>
             <p className='font-extralight'>Exibindo {customers.length} clientes</p>
-          </main>
+          </section>
         )
       }
-    </>
+    </main>
   );
 }
 
