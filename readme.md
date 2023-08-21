@@ -41,15 +41,6 @@ O backend disponibiliza os seguintes endpoints para interação com os dados dos
 
 ## Rodando o Projeto
 
-### Com Docker
-
-1. Abra um terminal na pasta raiz do projeto.
-2. Execute o comando `docker-compose up`.
-3. Aguarde o Docker iniciar (pode levar cerca de 3 minutos).
-4. Abra o navegador e acesse [http://localhost:3000](http://localhost:3000).
-
-### Sem Docker
-
 1. Abra dois terminais, um para o frontend e outro para o backend.
 2. No terminal do backend, navegue até a pasta e execute os comandos:
 ```bash
@@ -72,10 +63,11 @@ npm start
 ## Executando os Testes
 
 1. Abra um novo terminal e navegue até a pasta do frontend.
-2. Execute o comando `npm test`.
-3. Selecione a opção `e2e`.
-4. Escolha um navegador.
-5. Na aba `Specs`, selecione um dos testes disponíveis.
+2. Execute o comando `npm install`.
+3. Execute o comando `npm test`.
+4. Selecione a opção `e2e`.
+5. Escolha um navegador.
+6. Na aba `Specs`, selecione um dos testes disponíveis.
 
 Observação: Certifique-se de que o projeto esteja rodando para que os testes funcionem corretamente.
 
