@@ -71,13 +71,20 @@ npm start
 
 Observação: Certifique-se de que o projeto esteja rodando para que os testes funcionem corretamente.
 
+## Restaurando o BD
+
+1. Abra um novo terminal e navegue até a pasta do backend.
+2. Execute o comando `npm run restore`.
+
+## Resultados dos testes
+
+<img src="./cypress01.png" alt="Descrição da Imagem" width="65%"/>
+
+<img src="./cypress02.png" alt="Descrição da Imagem" width="65%"/>
+
+
 ## Resultados do Lightroom
 
 No Lightroom, o projeto apresentou métricas positivas, porém não atingiu 100 pontos em acessibilidade devido ao esquema de cores dos botões do layout.
 
 ![Resultados do Lightroom](lightroom.png)
-
-## Restaurando o BD
-
-1. Abra um novo terminal e navegue até a pasta do backend.
-2. Execute o comando `npm run restore`.
