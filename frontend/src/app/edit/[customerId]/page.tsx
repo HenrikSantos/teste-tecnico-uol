@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import CustomerForm from '@/components/CustomerForm';
 import { CustomerProps } from '@/components/Customer';
 import formValidator, { formCustomer } from '../../../utils/formValidator';
-
+import Loading from '@/components/Loading';
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -15,6 +15,7 @@ interface PageInterface {
 
 export default function Page({ params }: PageInterface) {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [customer, setCustomer] = useState<CustomerProps>({
     name: '',
     email: '',
@@ -28,9 +29,10 @@ export default function Page({ params }: PageInterface) {
       try {
         const { data } = await axios.get(`http://localhost:3001/customers/${params.customerId}`);
         setCustomer(data);
-        setLoading(false);
       } catch (error) {
         window.alert('Error fetching customer data: ' + error);
+        setError('Ocorreu um erro ao buscar os clientes.');
+      } finally {
         setLoading(false);
       }
     };
@@ -51,14 +53,9 @@ export default function Page({ params }: PageInterface) {
     }
 
     try {
-      await axios.put(`http://localhost:3001/customers/${params.customerId}`, {
-        name: customer.name,
-        email: customer.email,
-        cpf: customer.cpf,
-        telephone: customer.telephone,
-        status: customer.status
-      });
+      await axios.put(`http://localhost:3001/customers/${params.customerId}`, { ...customer });
       window.alert('Cliente atualizado com sucesso!');
+      window.location.href = '/';
     } catch (error) {
       window.alert('Ocorreu um erro ao atualizar o cliente, certifique-se que os dados estão corretos e que o servidor esteja rodando' + error);
     }
@@ -67,14 +64,16 @@ export default function Page({ params }: PageInterface) {
 
   return (
     <>
-      {loading ? (
-        <main className="mx-auto w-8/12 text-center text-3xl">
-          Loading...
-        </main>
-      ) : (
-        <main className='mx-auto w-8/12'>
-          <h3 className='text-2xl font-semibold'>Editar usuário</h3>
-          <p>Altere os campos a seguir para editar o usuário:</p>
+      <main className='mx-auto w-8/12'>
+        <h3 className='text-2xl font-semibold'>Editar usuário</h3>
+        <p>Altere os campos a seguir para editar o usuário:</p>
+        {loading ? (
+          <Loading />
+        ) : error ? (
+          <p className="mx-auto w-8/12 text-center text-red-500">
+            {error}
+          </p>
+        ) : (
           <section className='xl:w-3/12'>
             <CustomerForm customer={customer} setCustomer={setCustomer} />
             <section className='flex justify-between'>
@@ -84,7 +83,7 @@ export default function Page({ params }: PageInterface) {
               </Link>
             </section>
           </section>
-        </main>
-      )}
+        )}
+      </main>
     </>);
 }

@@ -38,6 +38,7 @@ export default function NewCustomer() {
       });
 
       window.alert('Usuário criado com sucesso!');
+      window.location.href = '/';
     } catch (error) {
       window.alert(
         'Ocorreu um erro ao criar um novo cliente, certifique-se que os dados estão corretos e que o servidor esteja rodando'
