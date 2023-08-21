@@ -84,3 +84,8 @@ Observação: Certifique-se de que o projeto esteja rodando para que os testes f
 No Lightroom, o projeto apresentou métricas positivas, porém não atingiu 100 pontos em acessibilidade devido ao esquema de cores dos botões do layout.
 
 ![Resultados do Lightroom](lightroom.png)
+
+## Restaurando o BD
+
+1. Abra um novo terminal e navegue até a pasta do backend.
+2. Execute o comando `npm run restore`.
