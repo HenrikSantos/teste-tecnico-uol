@@ -11,17 +11,16 @@ const formValidator = (key: keyof formCustomer, value: string): boolean => {
     cpf: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
     telephone: /^\(\d{2}\) \d{5}-\d{4}$/,
     email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    name: /^.*$/,
-    status: /^.*$/
+    name: /^.+$/,
+    status: /^.+$/
   };
 
   const regex = regexMap[key];
   if (!regex) {
-    return true; // No validation needed for other fields
+    return true;
   }
 
   if (!regex.test(value)) {
-    window.alert(`Erro: o ${key} está inválido!`);
     return false;
   }
 

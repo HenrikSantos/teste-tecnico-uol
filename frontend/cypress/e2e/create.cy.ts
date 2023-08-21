@@ -13,7 +13,7 @@ describe('Create customer', () => {
 		cy.visit('http://localhost:3000/new-customer');
 	});
   
-	it('testa o campo name está vazio', () => {
+	it('testa se o campo name está vazio', () => {
     cy.get('#submitBtn').click();
 
     cy.on('window:alert',(txt)=>{
@@ -21,7 +21,7 @@ describe('Create customer', () => {
 		});
   });
 
-  it('testa o campo email está vazio', () => {
+  it('testa se o campo email está vazio', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('#submitBtn').click();
     cy.on('window:alert',(txt)=>{
@@ -29,7 +29,7 @@ describe('Create customer', () => {
 		}); 
   });
 
-  it('testa o campo email está inválido', () => {
+  it('testa se o campo email está inválido', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}example.com`);
     cy.get('#submitBtn').click();
@@ -38,7 +38,7 @@ describe('Create customer', () => {
 		}); 
   });
 
-  it('testa o campo cpf está vazio', () => {
+  it('testa se o campo cpf está vazio', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
     cy.get('#submitBtn').click();
@@ -47,7 +47,7 @@ describe('Create customer', () => {
 		}); 
   });
 
-  it('testa o campo cpf está inválido', () => {
+  it('testa se o campo cpf está inválido', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
     cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(5, '0'));
@@ -57,7 +57,7 @@ describe('Create customer', () => {
 		}); 
   });
 
-  it('testa o campo telephone está vazio', () => {
+  it('testa se o campo telephone está vazio', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
     cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
@@ -67,7 +67,7 @@ describe('Create customer', () => {
 		});
   });
 
-  it('testa o campo telephone está inválido', () => {
+  it('testa se o campo telephone está inválido', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
     cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
@@ -78,7 +78,7 @@ describe('Create customer', () => {
 		}); 
   });
 
-  it('testa o campo status está vazio', () => {
+  it('testa se o campo status está vazio', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
     cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
