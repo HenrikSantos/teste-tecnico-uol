@@ -6,7 +6,7 @@ export interface formCustomer {
   status: string;
 }
 
-const formValidator = (key: keyof formCustomer, value: string): boolean => {
+const regexTest = (key: keyof formCustomer, value: string): boolean => {
   const regexMap: Record<keyof formCustomer, RegExp> & Record<string, RegExp> = {
     cpf: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
     telephone: /^\(\d{2}\) \d{5}-\d{4}$/,
@@ -27,4 +27,4 @@ const formValidator = (key: keyof formCustomer, value: string): boolean => {
   return true;
 };
 
-export default formValidator;
+export default regexTest;

@@ -43,12 +43,12 @@ describe('verifica os erros do formulário', () => {
 		}); 
   });
 
-  it('testa se o campo email está inválido', () => {
+  it('testa se o campo campo email está inválido', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}example.com`);
     cy.get('#submitBtn').click();
     cy.on('window:alert',(txt)=>{
-			expect(txt).to.contains('Erro: o email está inválido!');
+			expect(txt).to.contains('Erro: o campo email está inválido!');
 		}); 
   });
 
@@ -61,13 +61,13 @@ describe('verifica os erros do formulário', () => {
 		}); 
   });
 
-  it('testa se o campo cpf está inválido', () => {
+  it('testa se o campo campo cpf está inválido', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
     cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(5, '0'));
     cy.get('#submitBtn').click();
     cy.on('window:alert',(txt)=>{
-			expect(txt).to.contains('Erro: o cpf está inválido!');
+			expect(txt).to.contains('Erro: o campo cpf está inválido!');
 		}); 
   });
 
@@ -81,14 +81,14 @@ describe('verifica os erros do formulário', () => {
 		});
   });
 
-  it('testa se o campo telephone está inválido', () => {
+  it('testa se o campo campo telephone está inválido', () => {
     cy.get('[name="name"]').type('Cypress Test');
     cy.get('[name="email"]').type(`${Math.floor(Math.random() * 10000000009).toString().padStart(11, '0')}@example.com`);
     cy.get('[name="cpf"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(11, '0'));
     cy.get('[name="telephone"]').type(Math.floor(Math.random() * 10000000009).toString().padStart(5, '0'));
     cy.get('#submitBtn').click();
     cy.on('window:alert',(txt)=>{
-			expect(txt).to.contains('Erro: o telephone está inválido!');
+			expect(txt).to.contains('Erro: o campo telephone está inválido!');
 		}); 
   });
 });

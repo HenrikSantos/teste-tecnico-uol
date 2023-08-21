@@ -3,12 +3,7 @@
 import React, { useState } from 'react';
 import { CustomerProps } from './Customer';
 import InputMask from 'react-input-mask';
-import formValidator, { formCustomer } from '@/utils/formValidator';
-
-interface CustomerFormProps {
-  customer: CustomerProps;
-  setCustomer: React.Dispatch<React.SetStateAction<CustomerProps>>;
-}
+import regexTest, { formCustomer } from '@/utils/regexTest';
 
 interface formAlertProps {
   name: boolean;
@@ -16,6 +11,11 @@ interface formAlertProps {
   cpf: boolean;
   telephone: boolean;
   status: boolean;
+}
+
+interface CustomerFormProps {
+  customer: CustomerProps;
+  setCustomer: React.Dispatch<React.SetStateAction<CustomerProps>>;
 }
 
 const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) => {
@@ -28,7 +28,6 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-
     const { name, value } = e.target;
     setCustomer((prevCustomer) => ({
       ...prevCustomer,
@@ -37,7 +36,7 @@ const CustomerForm: React.FC<CustomerFormProps> = ({ customer, setCustomer }) =>
 
     setFormAlert(prevAlert => ({
       ...prevAlert,
-      [name]: formValidator(name as keyof formCustomer, value)
+      [name]: regexTest(name as keyof formCustomer, value)
     }));
   };
 

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import CustomerForm from '@/components/CustomerForm';
 import { CustomerProps } from '../../components/Customer';
-import formValidator, { formCustomer } from '../../utils/formValidator';
+import regexTest, { formCustomer } from '../../utils/regexTest';
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -23,19 +23,14 @@ export default function NewCustomer() {
         window.alert(`Erro: o campo ${key} está vazio!`);
         return;
       }
-      if (!formValidator(key as keyof formCustomer, value)) {
+      if (!regexTest(key as keyof formCustomer, value)) {
+        window.alert(`Erro: o campo ${key} está inválido!`);
         return;
       }
     }
 
     try {
-      await axios.post('http://localhost:3001/customers', {
-        name: customer.name,
-        email: customer.email,
-        cpf: customer.cpf,
-        telephone: customer.telephone,
-        status: customer.status,
-      });
+      await axios.post('http://localhost:3001/customers', { ...customer });
 
       window.alert('Usuário criado com sucesso!');
       window.location.href = '/';

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import CustomerForm from '@/components/CustomerForm';
 import { CustomerProps } from '@/components/Customer';
-import formValidator, { formCustomer } from '../../../utils/formValidator';
+import regexTest, { formCustomer } from '../../../utils/regexTest';
 import Loading from '@/components/Loading';
 import axios from 'axios';
 import Link from 'next/link';
@@ -47,7 +47,8 @@ export default function Page({ params }: PageInterface) {
         window.alert(`Erro: o campo ${key} está vazio!`);
         return;
       }
-      if (!formValidator(key as keyof formCustomer, value)) {
+      if (!regexTest(key as keyof formCustomer, value)) {
+        window.alert(`Erro: o campo ${key} está inválido!`);
         return;
       }
     }
