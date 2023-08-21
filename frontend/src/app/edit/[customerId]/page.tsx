@@ -13,7 +13,7 @@ interface PageInterface {
   }
 }
 
-export default function Page({ params }: PageInterface) {
+export default function Edit({ params }: PageInterface) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [customer, setCustomer] = useState<CustomerProps>({

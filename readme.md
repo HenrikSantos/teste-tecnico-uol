@@ -63,6 +63,9 @@ npm start
 npm install
 ```
 ```bash
+npm run build
+```
+```bash
 npm start
 ```
 

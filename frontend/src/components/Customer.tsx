@@ -32,7 +32,7 @@ const Customer: React.FC<CustomerProps> = ({
   };
 
   return (
-    <div
+    <section
       id={cpf.replaceAll('.', '').replaceAll('-', '')}
       className="my-6 flex flex-wrap items-center justify-between gap-2 rounded-sm border px-6 py-4 text-zinc-500 md:flex-nowrap md:gap-0"
     >
@@ -59,7 +59,7 @@ const Customer: React.FC<CustomerProps> = ({
       >
         Editar
       </Link>
-    </div>
+    </section>
   );
 };
 

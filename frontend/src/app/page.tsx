@@ -32,10 +32,10 @@ function App() {
       <section className='space-y-10'>
         <section>
           <section className='flex items-center justify-between gap-5'>
-            <section className='grid grid-cols-1 gap-4'>
+            <div className='grid grid-cols-1 gap-4'>
               <h3 className='text-xl font-medium '>Listagem de usuários</h3>
               <p className='text-sm md:text-base'>Escolha um cliente para visualizar os detalhes</p>
-            </section>
+            </div>
             <Link
               id='novoCliente'
               href={'/new-customer'}
@@ -46,7 +46,7 @@ function App() {
           {loading ? (
             <Loading />
           ) : error ? (
-            <p className="mx-auto w-8/12 text-center text-red-500">
+            <p className="mx-auto w-8/12 py-5 text-center text-xl font-semibold text-red-500">
               {error}
             </p>
           ) : (
